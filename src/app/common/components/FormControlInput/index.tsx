@@ -6,7 +6,7 @@ interface Props {
   errorMessage?: string;
   value: string;
   onChange: (value: string) => void;
-  onBlur?: () => void;
+  onBlur?: (event: any) => void;
   onFocus?: (value: string) => void;
   type?: React.HTMLInputTypeAttribute;
   required?: boolean;
@@ -17,19 +17,25 @@ const FormControlInput = ({
   placeholder = "",
   errorMessage = "",
   value = "",
-  onChange = (value: string) => {},
-  onBlur = () => {},
-  onFocus = () => {},
+  onChange = (value: string = "") => {},
+  onBlur = (event: any) => {},
   type = "text",
   required = false,
 }: Props) => {
   return (
-    <div className="flex-col flex w-full gap-2">
-      <label htmlFor={label} className="text-black-alt text-md">
+    <div className="flex-col flex w-full gap-2 mb-4">
+      <label
+        htmlFor={label}
+        className={`text-${
+          errorMessage ? "failed" : "black-alt font-body"
+        } text-md`}
+      >
         {label}
       </label>
       <input
-        className="rounded-xl  p-2 outline-none border-none"
+        className={`rounded-xl  p-2 outline-none border-2  ${
+          errorMessage ? "border-failed" : "border-primary"
+        }  shadow-lg font-body`}
         type={type}
         value={value}
         name={label}
@@ -39,9 +45,10 @@ const FormControlInput = ({
         aria-label={label}
         onChange={(event) => onChange(event.target.value)}
         onBlur={onBlur}
-        // onFocus={(event) => onFocus(event.target.value)}
       />
-      {errorMessage && <span className="text-failed">{errorMessage}</span>}
+      {errorMessage && (
+        <span className="text-failed text-sm ">{errorMessage}</span>
+      )}
     </div>
   );
 };
