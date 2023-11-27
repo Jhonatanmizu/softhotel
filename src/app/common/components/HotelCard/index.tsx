@@ -62,8 +62,8 @@ const HotelCard = ({
   };
 
   return (
-    <div className="flex flex-col justify-around bg-white border w-96 min-h-[24rem] shadow-lg p-4 font-medium text-sm rounded-2xl text-left">
-      <div className="flex w-[100%] h-[16.875rem]">
+    <div className="flex flex-col justify-around bg-white border w-[19.5rem] min-h-[24rem] shadow-lg p-4 font-medium text-sm rounded-2xl text-left mr-1 ml-1">
+      <div className="flex w-full h-[16.875rem]">
         <Image
           src={imageUrl}
           alt="hotel card image"
