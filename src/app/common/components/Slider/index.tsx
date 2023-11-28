@@ -1,8 +1,7 @@
 "use client";
-//React
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
-//Next
+//Components
 import Image from "next/image";
 
 //Slider
@@ -23,7 +22,7 @@ interface Props {
 const DefaultSlider = ({ items }: Props) => {
   //Slider settings
   const settings = {
-    dots: false,
+    dots: true,
     arrows: false,
     infinite: true,
     speed: 500,
@@ -38,8 +37,7 @@ const DefaultSlider = ({ items }: Props) => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          dots: true,
+          slidesToScroll: 1,
           arrows: true,
         },
       },
@@ -47,7 +45,7 @@ const DefaultSlider = ({ items }: Props) => {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
       {

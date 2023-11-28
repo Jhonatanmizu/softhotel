@@ -1,3 +1,4 @@
+//Components
 import DefaultSlider from "./common/components/Slider";
 import { HotelCard } from "./common";
 

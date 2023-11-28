@@ -1,7 +1,4 @@
-//React
-import React from "react";
-
-//NextJs
+//Components
 import Image from "next/image";
 
 interface Props {
