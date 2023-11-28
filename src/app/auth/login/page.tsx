@@ -7,9 +7,9 @@ import Link from "next/link";
 // Schema
 import loginSchema from "./schema";
 // Types
-import { LoginData } from "./types";
+import { ILoginData } from "./types";
 
-const initialValues: LoginData = {
+const initialValues: ILoginData = {
   email: "",
   password: "",
 };
