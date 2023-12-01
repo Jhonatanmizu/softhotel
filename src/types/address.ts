@@ -1,8 +1,8 @@
 export default interface IAddress {
-  id: string;
+  id?: string;
   neighborhood: string;
   publicPlace: string;
-  number: string;
+  number: number | null;
   zipCode: string;
   address: string;
   complement: string;

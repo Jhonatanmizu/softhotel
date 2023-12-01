@@ -3,18 +3,19 @@ export interface IRegisterFirstStepData {
   password: string;
   confirmPassword: string;
   name: string;
-  cpf: string;
+  contactIdentity: string;
 }
 
 export interface IRegisterSecondStepData {
-  phoneNumber: string;
-  bio?: string | null;
-  address: string;
-  city: string;
-  state: string;
+  contact: string;
+  bio: string;
+  neighborhood: string;
+  publicPlace: string;
+  number: number | null;
   zipCode: string;
-  birthDate: string;
-  addressNumber: number | null;
+  address: string;
+  complement: string;
+  photoUrl: string;
 }
 
 export type IRegisterData = IRegisterFirstStepData & IRegisterSecondStepData;

@@ -14,7 +14,7 @@ const registerSchemaFirstStep = Yup.object().shape({
       return true;
     }),
   name: Yup.string().required("É necessário informar o seu nome"),
-  cpf: Yup.string().required("É necessário informar o seu CPF"),
+  contactIdentity: Yup.string().required("É necessário informar o seu CPF"),
 });
 
 const registerSchemaSecondStep = Yup.object().shape({
