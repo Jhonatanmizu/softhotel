@@ -17,7 +17,9 @@ const initialValues: ILoginData = {
 const Login = () => {
   const form = useFormik({
     validationSchema: loginSchema,
-    onSubmit: () => {},
+    onSubmit: () => {
+      console.log("HADOUKEN in Login");
+    },
     initialValues,
   });
   const { handleChange, handleBlur, handleSubmit } = form;
@@ -25,8 +27,8 @@ const Login = () => {
   const formErrors = form.errors;
 
   return (
-    <main className="flex items-center justify-center min-h-screen p-2">
-      <section className="flex flex-1 flex-col justify-center  p-2 max-w-screen-sm sm:shadow-xl rounded-2xl bg-white ">
+    <main className="flex items-center justify-center min-h-screen p-2 bg-info">
+      <form className="flex flex-1 flex-col justify-center  p-2 max-w-screen-sm sm:shadow-xl rounded-2xl bg-white">
         <div className="w-full h-48 animate-pulse bg-info rounded-xl mb-2" />
         <h1 className="text-black-alt text-2xl mb-2 font-display">
           Bem vindo!
@@ -60,7 +62,7 @@ const Login = () => {
         >
           Não tem uma conta? Cadastre-se
         </Link>
-      </section>
+      </form>
     </main>
   );
 };
