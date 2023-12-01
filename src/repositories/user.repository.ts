@@ -1,21 +1,31 @@
 import { db } from "@/config/firebase";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 // Types
 import { createUserDTO, updateUserDTO } from "@/dtos/user.dto";
 
 const userCollectionRef = collection(db, "users");
+const addressCollectionRef = collection(db, "address");
 class UserRepo {
   public async createUser(userAuth: User, userDto: createUserDTO) {
     const userDocRef = doc(userCollectionRef, userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
+    const addressDocRef = doc(addressCollectionRef, userAuth.uid);
     const exists = userSnapshot.exists();
     if (exists) return userDocRef;
     const { email } = userAuth;
-    const { name, contact, photoUrl, bio, contactIdentity } = userDto;
+    const { name, contact, photoUrl, bio, contactIdentity, address } = userDto;
+    const { neighborhood, publicPlace, number, zipCode, complement } = address;
     const createdAt = new Date();
     const updatedAt = new Date();
     try {
+      await setDoc(addressDocRef, {
+        neighborhood,
+        publicPlace,
+        number,
+        zipCode,
+        complement,
+      });
       await setDoc(userDocRef, {
         name,
         email,
@@ -25,6 +35,7 @@ class UserRepo {
         bio,
         createdAt,
         updatedAt,
+        addressId: addressDocRef.id,
       });
       return userDocRef;
     } catch (error) {
