@@ -1,10 +1,11 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
 interface Props {
   text: string;
   disabled?: boolean;
   handleClick: () => void;
   variant?: "success" | "warning" | "failed";
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
 }
 
 const Button = ({
@@ -12,9 +13,11 @@ const Button = ({
   disabled = false,
   handleClick = () => {},
   variant = "success",
+  type = "button",
 }: Props) => {
   return (
     <button
+      type={type}
       onClick={handleClick}
       className={`
         ${variant ? `bg-${variant}` : "bg-success"}
