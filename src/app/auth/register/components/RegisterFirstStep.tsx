@@ -8,6 +8,8 @@ import Link from "next/link";
 import { Button, FormControlInput } from "@/app/common";
 // Types
 import { IRegisterFirstStepData } from "../types";
+// Helpers
+import { formatter } from "../../../common/helpers";
 
 interface Props {
   submitForm: (values: IRegisterFirstStepData) => void;
@@ -59,7 +61,7 @@ const RegisterFirstStep = ({ submitForm }: Props) => {
           placeholder="Insira seu CPF"
           onChange={handleChange("contactIdentity")}
           onBlur={handleBlur("contactIdentity")}
-          value={formValues.contactIdentity}
+          value={formatter.formatStringToCpf(formValues.contactIdentity)}
           required
           errorMessage={formErrors.contactIdentity}
         />
