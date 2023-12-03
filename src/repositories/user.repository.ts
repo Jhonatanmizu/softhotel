@@ -53,7 +53,22 @@ class UserRepo {
       console.error("Error when we tried to create user", error);
     }
   }
-
+  public async getUserById(userId: string) {
+    const userDocRef = doc(userCollectionRef, userId);
+    const addressDocRef = doc(addressCollectionRef, userId);
+    try {
+      const userSnapshot = await getDoc(userDocRef);
+      const addressSnapshot = await getDoc(addressDocRef);
+      const userData = userSnapshot.data();
+      const addressData = addressSnapshot.data();
+      return {
+        ...userData,
+        address: addressData,
+      } as IUser;
+    } catch (error) {
+      console.error("Error when we tried to retrieve the user data", error);
+    }
+  }
   public async updateUser(userAuth: User, userDTO: updateUserDTO) {
     const userDocRef = doc(userCollectionRef, userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
