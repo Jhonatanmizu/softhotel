@@ -1,15 +1,16 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 // Types
 import { IRegisterData } from "./types";
 // Components
 import RegisterFirstStep from "./components/RegisterFirstStep";
 import RegisterSecondStep from "./components/RegisterSecondStep";
 import { ProgressCircle } from "@/app/common";
-// Services
-import authService from "@/services/auth.service";
-// Repositories
-import userRepo from "@/repositories/user.repository";
+// Stories
+import useAuthStore from "@/store/auth/auth.store";
+// Types
+import { createUserDTO } from "@/dtos/user.dto";
 
 const initialValues: IRegisterData = {
   email: "",
@@ -31,48 +32,46 @@ const initialValues: IRegisterData = {
 const Register = () => {
   const [currentStep, setCurrentStep] = useState<"first" | "second">("first");
   const [formValues, setFormValues] = useState<IRegisterData>(initialValues);
+  const { register, isSigned } = useAuthStore();
+  const router = useRouter();
 
   const handleRegister = async (data: IRegisterData) => {
-    try {
-      const { email, password } = data;
-      const user = await authService.registerWithEmailAndPassword(
-        email,
-        password
-      );
-      const {
-        name,
-        contactIdentity,
+    const { email, password } = data;
+    const {
+      name,
+      contactIdentity,
+      complement,
+      bio,
+      publicPlace,
+      neighborhood,
+      zipCode,
+      number,
+      address,
+      contact,
+      photoUrl,
+    } = data;
+    const userDTO: createUserDTO = {
+      photoUrl,
+      email,
+      name,
+      contactIdentity,
+      bio,
+      contact,
+      address: {
         complement,
-        bio,
         publicPlace,
         neighborhood,
         zipCode,
         number,
         address,
-        contact,
-        photoUrl,
-      } = data;
-      const createdUser = await userRepo.createUser(user, {
-        photoUrl,
-        email,
-        name,
-        contactIdentity,
-        bio,
-        contact,
-        address: {
-          complement,
-          publicPlace,
-          neighborhood,
-          zipCode,
-          number,
-          address,
-        },
-      });
-    } catch (error) {
-      console.error("Error when we tried to register user", error);
-    }
+      },
+    };
+    register(email, password, userDTO);
   };
 
+  if (isSigned) {
+    router.push("/");
+  }
   return (
     <main className="flex items-center justify-center min-h-screen p-2 ">
       <section className="w-full bg-white p-2 max-w-screen-sm sm:shadow-xl rounded-2xl">
