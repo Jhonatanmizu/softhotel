@@ -8,5 +8,7 @@ export default interface IUser {
   bio: string;
   contactIdentity: string;
   address: IAddress;
-  role: IRole;
+  role?: IRole;
+  createdAt: Date;
+  updatedAt: Date;
 }
