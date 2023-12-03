@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { IRegisterData } from "./types";
 // Components
 import RegisterFirstStep from "./components/RegisterFirstStep";
+import RegisterSecondStep from "./components/RegisterSecondStep";
 import { ProgressCircle } from "@/app/common";
 // Services
 import authService from "@/services/auth.service";
@@ -22,7 +23,7 @@ const initialValues: IRegisterData = {
   neighborhood: "",
   publicPlace: "",
   complement: "",
-  number: null,
+  number: "",
   photoUrl: "",
   zipCode: "",
 };
@@ -31,9 +32,9 @@ const Register = () => {
   const [currentStep, setCurrentStep] = useState<"first" | "second">("first");
   const [formValues, setFormValues] = useState<IRegisterData>(initialValues);
 
-  const handleRegister = async () => {
+  const handleRegister = async (data: IRegisterData) => {
     try {
-      const { email, password } = formValues;
+      const { email, password } = data;
       const user = await authService.registerWithEmailAndPassword(
         email,
         password
@@ -50,8 +51,8 @@ const Register = () => {
         address,
         contact,
         photoUrl,
-      } = formValues;
-      await userRepo.createUser(user, {
+      } = data;
+      const createdUser = await userRepo.createUser(user, {
         photoUrl,
         email,
         name,
@@ -75,9 +76,9 @@ const Register = () => {
   return (
     <main className="flex items-center justify-center min-h-screen p-2 ">
       <section className="w-full bg-white p-2 max-w-screen-sm sm:shadow-xl rounded-2xl">
-        <ProgressCircle />
+        <ProgressCircle currentStep={currentStep} />
         <h1 className="text-black-alt text-2xl mb-2 font-display">
-          Cadastre-se
+          {currentStep === "first" ? "Cadastre-se" : "Estamos quase lá"}
         </h1>
         {currentStep === "first" && (
           <RegisterFirstStep
@@ -90,7 +91,18 @@ const Register = () => {
             }}
           />
         )}
-        {currentStep === "second" && <></>}
+        {currentStep === "second" && (
+          <RegisterSecondStep
+            submitForm={async (values) => {
+              const data = {
+                ...formValues,
+                ...values,
+              };
+              await handleRegister(data);
+            }}
+            handleGoBack={() => setCurrentStep("first")}
+          />
+        )}
       </section>
     </main>
   );
