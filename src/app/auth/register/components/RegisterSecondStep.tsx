@@ -6,6 +6,8 @@ import { IRegisterSecondStepData } from "../types";
 import { Button, FormControlInput } from "@/app/common";
 // Schemas
 import { registerSchemaSecondStep } from "../schema";
+// Helpers
+import { formatter } from "../../../common/helpers";
 
 interface Props {
   submitForm: (values: IRegisterSecondStepData) => void;
@@ -45,7 +47,7 @@ const RegisterSecondStep = ({ submitForm, handleGoBack }: Props) => {
           placeholder="Insira seu número de contato"
           onChange={handleChange("contact")}
           onBlur={handleBlur("contact")}
-          value={formValues.contact}
+          value={formatter.formatPhoneNumber(formValues.contact)}
           required
           errorMessage={formErrors.contact}
         />
@@ -54,7 +56,7 @@ const RegisterSecondStep = ({ submitForm, handleGoBack }: Props) => {
           placeholder="Insira seu CEP"
           onChange={handleChange("zipCode")}
           onBlur={handleBlur("zipCode")}
-          value={formValues.zipCode}
+          value={formatter.formatStringToCep(formValues.zipCode)}
           required
           errorMessage={formErrors.zipCode}
         />
@@ -92,6 +94,7 @@ const RegisterSecondStep = ({ submitForm, handleGoBack }: Props) => {
           onBlur={handleBlur("number")}
           value={formValues.number}
           required
+          type="number"
           errorMessage={formErrors.number}
         />
         <FormControlInput
