@@ -4,9 +4,12 @@ const registerSchemaFirstStep = Yup.object().shape({
   email: Yup.string()
     .required("Email é obrigatório")
     .email("Este email é inválido"),
-  password: Yup.string().required("Senha é obrigatória"),
+  password: Yup.string()
+    .required("Senha é obrigatória")
+    .min(6, "Dever ser mais de 6 caracteres"),
   confirmPassword: Yup.string()
     .required("Senha é obrigatória")
+    .min(6, "Dever ser mais de 6 caracteres")
     .test(function (value) {
       if (this.parent.password !== value) {
         return this.createError({ message: "As senhas não conferem" });
@@ -18,18 +21,16 @@ const registerSchemaFirstStep = Yup.object().shape({
 });
 
 const registerSchemaSecondStep = Yup.object().shape({
-  phoneNumber: Yup.string().required("É necessário informar o seu número"),
+  contact: Yup.string().required("É necessário informar o seu número"),
   bio: Yup.string(),
   address: Yup.string(),
-  city: Yup.string().required("É necessário informar a sua cidade"),
-  state: Yup.string().required("É necessário informar o seu estado"),
   zipCode: Yup.string().required("É necessário informar o seu código postal"),
-  birthDate: Yup.string().required(
-    "É necessário informar a sua data de nascimento"
-  ),
-  addressNumber: Yup.string().required(
+  number: Yup.string().required(
     "É necessário informar o número da sua residência"
   ),
+  publicPlace: Yup.string().required("É necessário informar o logradouro"),
+  complement: Yup.string(),
+  neighborhood: Yup.string(),
 });
 
 const fullRegisterSchema = registerSchemaFirstStep.concat(

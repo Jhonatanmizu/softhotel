@@ -11,7 +11,7 @@ export interface IRegisterSecondStepData {
   bio: string;
   neighborhood: string;
   publicPlace: string;
-  number: number | null;
+  number: string;
   zipCode: string;
   address: string;
   complement: string;
