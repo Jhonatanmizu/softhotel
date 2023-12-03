@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 // Components
 import { Button, FormControlInput } from "@/app/common";
@@ -8,6 +9,8 @@ import Link from "next/link";
 import loginSchema from "./schema";
 // Types
 import { ILoginData } from "./types";
+// Store
+import useAuthStore from "@/store/auth/auth.store";
 
 const initialValues: ILoginData = {
   email: "",
@@ -15,16 +18,23 @@ const initialValues: ILoginData = {
 };
 
 const Login = () => {
+  const router = useRouter();
+  const { isSigned, login } = useAuthStore();
   const form = useFormik({
     validationSchema: loginSchema,
-    onSubmit: () => {
-      console.log("HADOUKEN in Login");
+    onSubmit: (values) => {
+      const { email, password } = values;
+      login(email, password);
     },
     initialValues,
   });
   const { handleChange, handleBlur, handleSubmit } = form;
   const formValues = form.values;
   const formErrors = form.errors;
+
+  if (isSigned) {
+    router.push("/");
+  }
 
   return (
     <main className="flex items-center justify-center min-h-screen p-2 bg-info">
