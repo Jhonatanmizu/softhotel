@@ -9,24 +9,16 @@ import { Button, FormControlInput } from "@/app/common";
 // Types
 import { IRegisterFirstStepData } from "../types";
 
-// const initialValues: IRegisterFirstStepData = {
-//   email: "",
-//   password: "",
-//   confirmPassword: "",
-//   name: "",
-//   contactIdentity: "",
-// };
-
 interface Props {
   submitForm: (values: IRegisterFirstStepData) => void;
 }
 
 const initialValues: IRegisterFirstStepData = {
-  email: "natan@gmail.com",
-  password: "12345",
-  confirmPassword: "12345",
-  name: "natan",
-  contactIdentity: "75991202371",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  name: "",
+  contactIdentity: "",
 };
 
 const RegisterFirstStep = ({ submitForm }: Props) => {
