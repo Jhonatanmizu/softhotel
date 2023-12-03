@@ -3,6 +3,7 @@ import { collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 // Types
 import { createUserDTO, updateUserDTO } from "@/dtos/user.dto";
+import { IUser } from "@/types";
 
 const userCollectionRef = collection(db, "users");
 const addressCollectionRef = collection(db, "address");
@@ -37,7 +38,17 @@ class UserRepo {
         updatedAt,
         addressId: addressDocRef.id,
       });
-      return userDocRef;
+      return {
+        name,
+        email,
+        contact,
+        photoUrl,
+        contactIdentity,
+        bio,
+        createdAt,
+        updatedAt,
+        address,
+      } as IUser;
     } catch (error) {
       console.error("Error when we tried to create user", error);
     }
