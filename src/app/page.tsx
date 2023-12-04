@@ -1,11 +1,13 @@
 //Components
 import DefaultSlider from "./common/components/Slider";
 import { HotelCard } from "./common";
+import Footer from "./common/components/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex flex-col min-h-screen items-center justify-between gap-6">
       <DefaultSlider items={items} />
+      <Footer />
     </main>
   );
 }
