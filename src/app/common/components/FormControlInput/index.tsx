@@ -10,6 +10,7 @@ interface Props {
   onFocus?: (value: string) => void;
   type?: React.HTMLInputTypeAttribute;
   required?: boolean;
+  maxLength?: number;
 }
 
 const FormControlInput = ({
@@ -21,6 +22,7 @@ const FormControlInput = ({
   onBlur = (event: any) => {},
   type = "text",
   required = false,
+  maxLength = 100,
 }: Props) => {
   return (
     <div className="flex-col flex w-full gap-2 mb-4">
@@ -33,6 +35,7 @@ const FormControlInput = ({
         {label}
       </label>
       <input
+        maxLength={maxLength}
         className={`rounded-xl  p-2 outline-none border-2  ${
           errorMessage ? "border-failed" : "border-primary"
         }  shadow-lg font-body`}

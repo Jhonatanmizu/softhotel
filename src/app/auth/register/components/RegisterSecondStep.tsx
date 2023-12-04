@@ -46,6 +46,7 @@ const RegisterSecondStep = ({ submitForm, handleGoBack }: Props) => {
           label="Número de contato"
           placeholder="Insira seu número de contato"
           onChange={handleChange("contact")}
+          maxLength={15}
           onBlur={handleBlur("contact")}
           value={formatter.formatPhoneNumber(formValues.contact)}
           required
@@ -53,6 +54,7 @@ const RegisterSecondStep = ({ submitForm, handleGoBack }: Props) => {
         />
         <FormControlInput
           label="CEP"
+          maxLength={9}
           placeholder="Insira seu CEP"
           onChange={handleChange("zipCode")}
           onBlur={handleBlur("zipCode")}

@@ -60,6 +60,7 @@ const RegisterFirstStep = ({ submitForm }: Props) => {
           label="CPF"
           placeholder="Insira seu CPF"
           onChange={handleChange("contactIdentity")}
+          maxLength={14}
           onBlur={handleBlur("contactIdentity")}
           value={formatter.formatStringToCpf(formValues.contactIdentity)}
           required
