@@ -8,18 +8,8 @@ import { createRoomDTO, updateRoomDTO } from "../dtos/rooms.dto";
 //Collection Reference
 const roomCollectionRef = collection(db, "rooms");
 
-//Room update target ID
-interface TargetRoom {
-  uid: string;
-}
-
-//Current hotel ID
-interface currentHotel {
-  uid: string;
-}
-
 class RoomRepo {
-  async createRoom(roomData: createRoomDTO, currentHotel: currentHotel) {
+  async createRoom(roomData: createRoomDTO, currentHotelId: string) {
     const {
       title,
       description,
@@ -41,7 +31,7 @@ class RoomRepo {
       daily_price: daily_price,
     };
 
-    const documentId = currentHotel.uid + title + number;
+    const documentId = currentHotelId + title + number;
 
     const roomDocRef = doc(roomCollectionRef, documentId);
     const roomSnapshot = await getDoc(roomDocRef);
@@ -59,7 +49,7 @@ class RoomRepo {
     }
   }
 
-  async updateRoom(roomData: updateRoomDTO, target: TargetRoom) {
+  async updateRoom(roomData: updateRoomDTO, targetId: string) {
     const {
       title,
       description,
@@ -82,7 +72,7 @@ class RoomRepo {
       daily_price: daily_price,
     };
 
-    const roomDocRef = doc(roomCollectionRef, target.uid);
+    const roomDocRef = doc(roomCollectionRef, targetId);
     const roomSnapshot = await getDoc(roomDocRef);
     const exists = roomSnapshot.exists();
 

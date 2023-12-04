@@ -59,7 +59,7 @@ const DefaultSlider = ({ items }: Props) => {
   };
 
   return (
-    <div className="flex w-screen justify-center shadow-lg p-1">
+    <div className="flex w-screen justify-center p-1">
       <Slider {...settings} className="w-[100%] sm:w-[95%]">
         {items.map((item, index) => (
           <div key={index}>{item}</div>

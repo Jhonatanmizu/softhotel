@@ -8,11 +8,6 @@ import { createHotelDTO, updateHotelDTO } from "@/dtos/hotel.dto";
 //Collection Reference
 const hotelCollectionRef = collection(db, "hotels");
 
-//Hotel target target ID
-interface TargetHotel {
-  uid: string;
-}
-
 class HotelRepo {
   async createHotel(userAuth: any, hotelData: createHotelDTO) {
     const {
@@ -59,7 +54,7 @@ class HotelRepo {
     }
   }
 
-  async updateHotel(target: TargetHotel, hotelData: updateHotelDTO) {
+  async updateHotel(targetId: string, hotelData: updateHotelDTO) {
     const {
       title,
       description,
@@ -88,7 +83,7 @@ class HotelRepo {
       plan_id: plan_id,
     };
 
-    const documentId = target.uid;
+    const documentId = targetId;
 
     const hotelDocRef = doc(hotelCollectionRef, documentId);
     const hotelSnapshot = await getDoc(hotelDocRef);
