@@ -1,5 +1,5 @@
 import { HotelCard } from "../../../common";
-import { imageUrl } from "./image";
+import imageUrl from "./image";
 
 export const items = [
   <div key={1}>
@@ -44,6 +44,7 @@ export const items = [
       imageUrl={imageUrl}
       hotelName="Hotel"
       stars={4}
+      key={4}
       initialPrice={300}
       finalPrice={1500}
       classification={9}

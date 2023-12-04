@@ -1,4 +1,4 @@
-import { imageUrl } from "./image";
+import imageUrl from "./image";
 
 export const benefits = [
   {

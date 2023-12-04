@@ -1,3 +1,4 @@
+"use client";
 import Slider from "react-slick";
 import { ReactNode } from "react";
 //Components
@@ -5,9 +6,6 @@ import Image from "next/image";
 //Icons
 import NextArrow from "../../images/rightArrow.svg";
 import BackArrow from "../../images/leftArrow.svg";
-// Slider Styles
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 interface Props {
   items: ReactNode[];

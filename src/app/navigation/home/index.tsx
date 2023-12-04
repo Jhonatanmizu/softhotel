@@ -1,8 +1,8 @@
-import { DefaultSlider, BenefitCard, Footer } from "../../common/";
-import { items } from "./templates/items";
+import { DefaultSlider, BenefitCard, Footer } from "../../common";
 import { benefits } from "./templates/benefits";
+import { items } from "./templates/items";
 
-function HomePage() {
+const HomePage = () => {
   const benefitsList = benefits.map((item, index) => (
     <BenefitCard
       key={index}
@@ -33,6 +33,6 @@ function HomePage() {
       <Footer />
     </div>
   );
-}
+};
 
 export default HomePage;
