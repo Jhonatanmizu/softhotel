@@ -18,7 +18,7 @@ const DefaultSlider = ({ items }: Props) => {
   const settings = {
     dots: true,
     arrows: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -29,8 +29,8 @@ const DefaultSlider = ({ items }: Props) => {
   };
 
   return (
-    <div className="flex w-screen justify-center shadow-lg p-1">
-      <Slider {...settings} className="w-[100%] sm:w-[95%]">
+    <div className="flex flex-row w-full mb-[1rem]">
+      <Slider {...settings} className="w-full">
         {items.map((item, index) => (
           <div key={index}>{item}</div>
         ))}

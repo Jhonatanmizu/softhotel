@@ -7,6 +7,7 @@ import HotelCard from "./components/HotelCard";
 import Button from "./components/Button";
 import ProgressCircle from "./components/ProggressCircle";
 import DefaultSlider from "./components/Slider";
+import Footer from "./components/Footer";
 
 ///////////////// EXPORTS
 export {
@@ -16,4 +17,5 @@ export {
   Button,
   ProgressCircle,
   DefaultSlider,
+  Footer,
 };
