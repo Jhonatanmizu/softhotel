@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { toast } from "react-toastify";
 // Repositories
 import userRepo from "@/repositories/user.repository";
 // Service
@@ -8,9 +9,13 @@ import { createUserDTO } from "@/dtos/user.dto";
 import { IUser } from "@/types";
 
 interface AuthState {
-  login: (email: string, password: string) => void;
-  register: (email: string, password: string, userDTO: createUserDTO) => void;
-  recovery: (email: string) => void;
+  login: (email: string, password: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    userDTO: createUserDTO
+  ) => Promise<void>;
+  recovery: (email: string) => Promise<void>;
   logout: () => void;
   user: IUser;
   isSigned: boolean;
@@ -47,9 +52,12 @@ const useAuthStore = create<AuthState>()((set) => ({
       const user = await authService.loginWithEmailAndPassword(email, password);
       const userData = await userRepo.getUserById(user.uid);
       set({ user: userData, isLoading: false, isSigned: true });
-    } catch (error) {
-      console.error("Error when we tried to login", error);
-      set({ error });
+      toast("Login realizado com sucesso!");
+    } catch (error: any) {
+      console.error("Error when we tried to login", error.code);
+      const errorMessage = authService.handleFirebaseAuthError(error.code);
+      toast(errorMessage);
+      set({ error, isLoading: false });
     }
   },
   register: async (email: string, password: string, userDTO: createUserDTO) => {
@@ -61,12 +69,16 @@ const useAuthStore = create<AuthState>()((set) => ({
       );
       const createdUser = await userRepo.createUser(userAuth, userDTO);
       set({ user: createdUser as IUser, isLoading: false, isSigned: true });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating user", error);
+      const errorMessage = authService.handleFirebaseAuthError(error.code);
+      toast(errorMessage);
       set({ error });
     }
   },
-  recovery: (email) => {},
+  recovery: async (email) => {
+    return await authService.recoveryPassword(email);
+  },
   logout: () => {},
 }));
 
