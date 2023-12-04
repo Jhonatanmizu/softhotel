@@ -6,11 +6,15 @@ export const items = [
     <HotelCard
       imageUrl={imageUrl}
       hotelName="Hotel"
-      stars={4}
+      stars={5}
       initialPrice={300}
       finalPrice={1500}
-      classification={9}
-      benefits={["Sei lá"]}
+      classification={9.5}
+      benefits={[
+        "Café da manhã grátis",
+        "Cancelamento Gratuito",
+        "WiFi Grátis",
+      ]}
     />
   </div>,
   <div key={2}>
@@ -20,19 +24,19 @@ export const items = [
       stars={4}
       initialPrice={300}
       finalPrice={1500}
-      classification={9}
-      benefits={["Sei lá"]}
+      classification={8.7}
+      benefits={["Café da manhã grátis", "Cancelamento Gratuito"]}
     />
   </div>,
   <div key={3}>
     <HotelCard
       imageUrl={imageUrl}
       hotelName="Hotel"
-      stars={4}
+      stars={3}
       initialPrice={300}
       finalPrice={1500}
-      classification={9}
-      benefits={["Sei lá"]}
+      classification={8}
+      benefits={["Cancelamento Gratuito"]}
     />
   </div>,
   <div key={4}>
@@ -43,7 +47,7 @@ export const items = [
       initialPrice={300}
       finalPrice={1500}
       classification={9}
-      benefits={["Sei lá"]}
+      benefits={["WiFi grátis", "Cancelamento Gratuito"]}
     />
   </div>,
 ];

@@ -24,7 +24,7 @@ const DefaultSlider = ({ items }: Props) => {
   const settings = {
     dots: true,
     arrows: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -32,35 +32,11 @@ const DefaultSlider = ({ items }: Props) => {
     adaptiveHeight: true,
     nextArrow: <Image src={NextArrow} alt="next-arrow" />,
     prevArrow: <Image src={BackArrow} alt="back-arrow" />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          arrows: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (
-    <div className="flex w-screen justify-center p-1">
-      <Slider {...settings} className="w-[100%] sm:w-[95%]">
+    <div className="flex flex-row w-full mb-[1rem]">
+      <Slider {...settings} className="w-full">
         {items.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
