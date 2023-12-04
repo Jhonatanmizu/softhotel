@@ -16,4 +16,5 @@ export interface updateUserDTO {
   contact: string;
   bio: string;
   photoUrl: string;
+  address: IAddress;
 }
