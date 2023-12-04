@@ -1,6 +1,6 @@
+"use client";
 //Components
-import DefaultSlider from "./common/components/Slider";
-import { HotelCard } from "./common";
+import { HotelCard, DefaultSlider } from "./common";
 
 export default function Home() {
   return (

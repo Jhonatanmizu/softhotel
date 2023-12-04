@@ -1,6 +1,6 @@
+import React from "react";
 //Components
 import Image from "next/image";
-
 //SVG
 import ratingStar from "../../images/ratingStar.svg";
 
@@ -89,8 +89,7 @@ const HotelCard = ({
         </div>
 
         <span className="flex gap-1 font-body font-bold text-black-alt mt-1">
-          <p className="">R$ {initialPrice}</p> -
-          <p className="">R$ {finalPrice}</p>
+          <p>R$ {initialPrice}</p> -<p>R$ {finalPrice}</p>
         </span>
       </div>
     </div>
