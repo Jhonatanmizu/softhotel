@@ -3,6 +3,10 @@ import { useState, useMemo } from "react";
 
 //Components
 import { DefaultSlider, BenefitCard, Footer, HotelCard } from "../../common";
+import Image from "next/image";
+
+//Icons
+import SearchIcon from "../../common/images/searchIcon.svg";
 
 import { benefits } from "./templates/benefits";
 import { hotelsList, hotelsList2 } from "./templates/hotels";
@@ -78,12 +82,20 @@ const HomePage = () => {
 
   return (
     <main className="flex flex-col w-full full justify-between items-center gap-4">
-      <input
-        type="text"
-        placeholder="Pesquisar"
-        value={searchValue}
-        onChange={handleSearch}
-      />
+      <div className="relative flex w-[90%] h-10 sm:w-96 sm:self-start sm:ml-4 items-center transition-all">
+        <input
+          type="text"
+          placeholder="Pesquisar..."
+          value={searchValue}
+          onChange={handleSearch}
+          className="w-full h-full border border-info rounded-lg pl-5 shadow-lg hover:opacity-70"
+        />
+        <Image
+          src={SearchIcon}
+          alt="searchIcon"
+          className="absolute w-5 h-5 right-5"
+        />
+      </div>
       {filteredHotels.length > 0 && searchValue !== "" ? (
         <DefaultSlider items={mappedHotels} />
       ) : null}
