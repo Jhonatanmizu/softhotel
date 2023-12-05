@@ -1,11 +1,11 @@
 "use client";
+import useAuthStore from "@/store/auth/auth.store";
 //Components
 import HomePage from "./navigation/home";
 
-export default function Home() {
-  return (
-    <div className="w-screen min-h-screen">
-      <HomePage />
-    </div>
-  );
-}
+const Home = () => {
+  const loadUser = useAuthStore.getState().loadUser;
+  loadUser();
+  return <HomePage />;
+};
+export default Home;
