@@ -14,7 +14,7 @@ interface Props {
 const DefaultSlider = ({ items }: Props) => {
   //Slider settings
   const settings = {
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: false,
     speed: 500,
