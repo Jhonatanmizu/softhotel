@@ -19,7 +19,7 @@ const BenefitCard = ({ imageUrl, title, text }: Props) => {
       />
       <div className="w-full h-auto sm:h-[12rem] text-ellipsis text-black-alt">
         <p className="text-lg font-display">{title}</p>
-        <p className="font-body">{text}</p>
+        <p className="font-body text-md">{text}</p>
       </div>
     </div>
   );

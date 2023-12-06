@@ -38,7 +38,7 @@ const Recovery = () => {
   const formValues = form.values;
   const formErrors = form.errors;
   return (
-    <main className="flex items-center justify-center min-h-screen p-2 bg-info">
+    <main className="flex items-center justify-center min-h-screen p-2">
       <ToastContainer />
       <form className="flex flex-1 flex-col justify-center  p-2 max-w-screen-sm sm:shadow-xl rounded-2xl bg-white">
         <h1 className="text-black-alt text-2xl mb-2 font-display">

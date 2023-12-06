@@ -59,7 +59,7 @@ const HotelCard = ({
   };
 
   return (
-    <div className="flex flex-col justify-around bg-white border w-[19.5rem] h-[24rem] shadow-md p-3 font-medium text-sm rounded-2xl text-left ml-2">
+    <div className="flex flex-col justify-around bg-white border w-[19.5rem] h-[24rem] shadow-md p-3 font-medium text-sm rounded-lg text-left ml-3">
       <div className="flex w-full h-[16.875rem]">
         <Image
           src={imageUrl}
@@ -77,11 +77,11 @@ const HotelCard = ({
 
       <div className="flex flex-col justify-between">
         <div className="flex flex-row justify-between">
-          <p className="text-black-alt text-3xl font-display font-bold">
+          <p className="text-black-alt text-2xl font-display font-bold">
             {hotelName}
           </p>
 
-          <div className="flex items-center justify-center bg-success rounded w-8 h-8 mt-2 text-white">
+          <div className="flex items-center justify-center bg-success rounded w-8 h-8 text-white">
             <span className="font-body text-lg">{classification}</span>
           </div>
         </div>

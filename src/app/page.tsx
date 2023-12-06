@@ -1,4 +1,5 @@
 "use client";
+import { NextUIProvider } from "@nextui-org/react";
 import useAuthStore from "@/store/auth/auth.store";
 import { useEffect } from "react";
 //Components
@@ -10,6 +11,10 @@ const Home = () => {
     loadUser();
   }, [loadUser]);
 
-  return <HomePage />;
+  return (
+    <NextUIProvider>
+      <HomePage />
+    </NextUIProvider>
+  );
 };
 export default Home;
