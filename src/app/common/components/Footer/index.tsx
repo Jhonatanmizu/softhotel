@@ -9,7 +9,7 @@ const termsAndConditions = `Termos e Condições`;
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col w-screen bottom-0 items-center p-1 bg-primary text-white text-center gap-1">
+    <footer className="flex flex-col w-full bottom-0 items-center p-1 bg-primary text-white text-center gap-1">
       <p>{defaultApresentation}</p>
       <div className="flex flex-row w-full justify-around items-center">
         <a className="hover:cursor-pointer hover:underline">{privacy}</a>

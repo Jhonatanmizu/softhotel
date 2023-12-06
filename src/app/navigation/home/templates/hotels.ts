@@ -16,7 +16,7 @@ export const hotelsList = [
     stars: 3,
     initialPrice: 120,
     finalPrice: 100,
-    classification: 7,
+    classification: 6.9,
     benefits: ["Lareira acesa", "Jantar à luz de velas", "Trilhas na natureza"],
   },
   {

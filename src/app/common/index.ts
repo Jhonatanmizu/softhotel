@@ -8,6 +8,7 @@ import Button from "./components/Button";
 import ProgressCircle from "./components/ProggressCircle";
 import DefaultSlider from "./components/Slider";
 import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
 
 ///////////////// EXPORTS
 export {
@@ -18,4 +19,5 @@ export {
   ProgressCircle,
   DefaultSlider,
   Footer,
+  NavBar,
 };

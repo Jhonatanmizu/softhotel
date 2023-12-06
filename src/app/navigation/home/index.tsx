@@ -2,7 +2,7 @@
 import { useState, useMemo } from "react";
 
 //Components
-import { DefaultSlider, BenefitCard, Footer, HotelCard } from "../../common";
+import { DefaultSlider, BenefitCard, HotelCard } from "../../common";
 import Image from "next/image";
 
 //Icons
@@ -81,7 +81,7 @@ const HomePage = () => {
   ));
 
   return (
-    <main className="flex flex-col w-full full justify-between items-center gap-4">
+    <main className="flex flex-col w-full full justify-between items-center gap-4 pt-5 shadow-lg">
       <div className="relative flex w-[90%] h-10 sm:w-96 sm:self-start sm:ml-4 items-center transition-all">
         <input
           type="text"
@@ -117,7 +117,6 @@ const HomePage = () => {
         </p>
         <DefaultSlider items={benefitsList} />
       </section>
-      <Footer />
     </main>
   );
 };

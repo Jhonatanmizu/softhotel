@@ -38,7 +38,7 @@ const Login = () => {
   }
 
   return (
-    <main className="flex items-center justify-center min-h-screen p-2 bg-info">
+    <main className="flex items-center justify-center min-h-screen p-2">
       <ToastContainer />
       <form className="flex flex-1 flex-col justify-center  p-2 max-w-screen-sm sm:shadow-xl rounded-2xl bg-white">
         <div className="w-full h-48 animate-pulse bg-info rounded-xl mb-2" />
