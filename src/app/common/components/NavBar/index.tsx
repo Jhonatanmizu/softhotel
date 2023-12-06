@@ -17,9 +17,11 @@ import {
 } from "@nextui-org/react";
 
 import menuItems from "./items";
+import useAuthStore from "@/store/auth/auth.store";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isSigned, logout } = useAuthStore();
 
   return (
     <Navbar
@@ -33,49 +35,55 @@ export default function NavBar() {
           icon={<Image src={MoreOptions} alt="more options icon" />}
         />
         <NavbarBrand>
-          <Link href="/">
-            <p className="font-bold text-inherit">SOFTHOTEL</p>
+          <Link href="/" className="text-white">
+            SOFTHOTEL
           </Link>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="/auth/profile" aria-current="page">
-            Seu Perfil
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex p-2 rounded-2xl">
-          <Button
-            as={Link}
-            href="/auth/login"
-            className="ring-1 rounded-xl p-2"
-          >
-            Entrar
-          </Button>
+          {isSigned ? (
+            <h3>{`Olá ${user.name}`}</h3>
+          ) : (
+            <Button
+              as={Link}
+              href="/auth/login"
+              className="ring-1 rounded-xl p-2"
+            >
+              Entrar
+            </Button>
+          )}
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color="foreground"
-              className="w-full hover:ml-5 transition-all"
-              href={item.address}
-              size="lg"
-            >
-              {item.title}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-        <Button
-          className="ring-1 rounded-xl p-2 bg-failed w-[90%] sm:w-[10%] text-white"
-          onPress={() => alert("Saiu")}
-        >
-          SAIR
-        </Button>
+        {menuItems.map((item, index) => {
+          if (
+            (isSigned && item.title === "Cadastro") ||
+            (isSigned && item.title === "Entrar")
+          )
+            return null;
+          return (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              <Link
+                color="foreground"
+                className="w-full hover:ml-5 transition-all"
+                href={item.address}
+                size="lg"
+              >
+                {item.title}
+              </Link>
+            </NavbarMenuItem>
+          );
+        })}
+        {isSigned && (
+          <Button
+            className="ring-1 rounded-xl p-2 bg-failed w-[90%] sm:w-[10%] text-white"
+            onPress={logout}
+          >
+            SAIR
+          </Button>
+        )}
       </NavbarMenu>
     </Navbar>
   );

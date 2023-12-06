@@ -1,13 +1,12 @@
 "use client";
 import { useState, useMemo } from "react";
-
 //Components
 import { DefaultSlider, BenefitCard, HotelCard } from "../../common";
 import Image from "next/image";
-
+import { ToastContainer } from "react-toastify";
 //Icons
 import SearchIcon from "../../common/images/searchIcon.svg";
-
+// DATA
 import { benefits } from "./templates/benefits";
 import { hotelsList, hotelsList2 } from "./templates/hotels";
 
@@ -82,6 +81,7 @@ const HomePage = () => {
 
   return (
     <main className="flex flex-col w-full full justify-between items-center gap-4 pt-5 shadow-lg">
+      <ToastContainer />
       <div className="relative flex w-[90%] h-10 sm:w-96 sm:self-start sm:ml-4 items-center transition-all">
         <input
           type="text"
@@ -97,24 +97,29 @@ const HomePage = () => {
         />
       </div>
       {filteredHotels.length > 0 && searchValue !== "" ? (
-        <DefaultSlider items={mappedHotels} />
+        <>
+          <h3 className="pl-3 text-2xl text-black-alt font-medium mb-3">
+            Resultados para {searchValue}
+          </h3>
+          <DefaultSlider items={mappedHotels} />
+        </>
       ) : null}
       <section className="flex flex-col w-full gap-2">
-        <p className="pl-3 text-2xl text-black-alt font-medium mb-3">
+        <h3 className="pl-3 text-2xl text-black-alt font-medium mb-3">
           Por Perto
-        </p>
+        </h3>
         <DefaultSlider items={hotelList} />
       </section>
       <section className="flex flex-col w-full gap-2">
-        <p className="pl-3 text-2xl text-black-alt font-medium mb-3">
+        <h3 className="pl-3 text-2xl text-black-alt font-medium mb-3">
           Recomendado
-        </p>
+        </h3>
         <DefaultSlider items={hotelList2} />
       </section>
       <section className="flex flex-col w-full gap-2">
-        <p className="pl-3 text-2xl text-black-alt font-medium mb-3">
+        <h3 className="pl-3 text-2xl text-black-alt font-medium mb-3">
           Nossos benefícios
-        </p>
+        </h3>
         <DefaultSlider items={benefitsList} />
       </section>
     </main>

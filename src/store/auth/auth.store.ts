@@ -76,7 +76,9 @@ const useAuthStore = create<AuthState>()((set) => ({
       const createdUser = await userRepo.createUser(userAuth, userDTO);
       storageService.setData("user", createdUser);
       toast("Cadastro realizado com sucesso!");
-      set({ user: createdUser as IUser, isLoading: false, isSigned: true });
+      setTimeout(() => {
+        set({ user: createdUser as IUser, isLoading: false, isSigned: true });
+      }, 500);
     } catch (error: any) {
       const errorMessage = authService.handleFirebaseAuthError(error.code);
       console.error("Error creating user", errorMessage);
@@ -89,7 +91,9 @@ const useAuthStore = create<AuthState>()((set) => ({
   },
   logout: () => {
     set({ isLoading: true });
+    toast("Logout efetuado com sucesso!");
     setTimeout(() => {
+      storageService.setData("user", null);
       set({ isSigned: false, user: initialUserState, isLoading: false });
     }, 500);
   },
@@ -97,7 +101,7 @@ const useAuthStore = create<AuthState>()((set) => ({
     set({ isLoading: true });
     const user = storageService.getData("user");
     console.log("LOADED USER", user);
-    if (!user) return;
+    if (!user) return set({ isLoading: false });
     set({ user: user as IUser, isLoading: false, isSigned: true });
   },
   updateProfile: async (userId, userDTO) => {
@@ -109,7 +113,9 @@ const useAuthStore = create<AuthState>()((set) => ({
       storageService.setData("user", updatedUser);
       if (!updatedUser) return;
       toast("Perfil atualizado com sucesso!");
-      set({ user: updatedUser as IUser, isLoading: false });
+      setTimeout(() => {
+        set({ user: updatedUser as IUser, isLoading: false });
+      }, 500);
     } catch (error) {
       toast("Ocorreu um erro ao tentar atualizar o perfil!");
     }
