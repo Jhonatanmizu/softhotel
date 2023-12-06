@@ -12,6 +12,7 @@ export interface createUserDTO {
 }
 
 export interface updateUserDTO {
+  id: string;
   name: string;
   contact: string;
   bio: string;
