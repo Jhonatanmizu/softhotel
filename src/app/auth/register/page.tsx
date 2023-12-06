@@ -6,6 +6,7 @@ import { IRegisterData } from "./types";
 // Components
 import RegisterFirstStep from "./components/RegisterFirstStep";
 import RegisterSecondStep from "./components/RegisterSecondStep";
+import { ToastContainer } from "react-toastify";
 import { ProgressCircle } from "@/app/common";
 // Stories
 import useAuthStore from "@/store/auth/auth.store";
@@ -32,8 +33,7 @@ const initialValues: IRegisterData = {
 const Register = () => {
   const [currentStep, setCurrentStep] = useState<"first" | "second">("first");
   const [formValues, setFormValues] = useState<IRegisterData>(initialValues);
-  const { register, isSigned } = useAuthStore();
-  const router = useRouter();
+  const { register } = useAuthStore();
 
   const handleRegister = async (data: IRegisterData) => {
     const { email, password } = data;
@@ -69,11 +69,9 @@ const Register = () => {
     register(email, password, userDTO);
   };
 
-  if (isSigned) {
-    router.push("/");
-  }
   return (
     <main className="flex items-center justify-center min-h-screen p-2 ">
+      <ToastContainer />
       <section className="w-full bg-white p-2 max-w-screen-sm sm:shadow-xl rounded-2xl">
         <ProgressCircle currentStep={currentStep} />
         <h1 className="text-black-alt text-2xl mb-2 font-display">

@@ -20,7 +20,7 @@ const initialValues: ILoginData = {
 
 const Login = () => {
   const router = useRouter();
-  const { isSigned, login, isLoading } = useAuthStore();
+  const { login, isLoading, isSigned } = useAuthStore();
   const form = useFormik({
     validationSchema: loginSchema,
     onSubmit: async (values) => {
@@ -33,7 +33,7 @@ const Login = () => {
   const formValues = form.values;
   const formErrors = form.errors;
 
-  if (isSigned) {
+  if (!isLoading && isSigned) {
     router.push("/");
   }
 

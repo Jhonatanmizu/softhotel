@@ -1,5 +1,5 @@
 import { db } from "@/config/firebase";
-import { collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 // Types
 import { createUserDTO, updateUserDTO } from "@/dtos/user.dto";
@@ -48,6 +48,7 @@ class UserRepo {
         createdAt,
         updatedAt,
         address,
+        id: userDocRef.id,
       } as IUser;
     } catch (error) {
       console.error("Error when we tried to create user", error);
@@ -64,23 +65,25 @@ class UserRepo {
       return {
         ...userData,
         address: addressData,
+        id: userDocRef.id,
       } as IUser;
     } catch (error) {
       console.error("Error when we tried to retrieve the user data", error);
     }
   }
-  public async updateUser(userAuth: User, userDTO: updateUserDTO) {
-    const userDocRef = doc(userCollectionRef, userAuth.uid);
+  public async updateUser(userId: string, userDTO: updateUserDTO) {
+    const userDocRef = doc(userCollectionRef, userId);
     const userSnapshot = await getDoc(userDocRef);
     const exists = userSnapshot.exists();
-    if (!exists) return console.error(`Could not find user ${userAuth.uid}`);
+    if (!exists) return console.error(`Could not find user ${userId}`);
     try {
-      const { name, photoUrl, bio, contact } = userDTO;
-      await setDoc(userDocRef, {
+      const { name, photoUrl, bio, contact, address } = userDTO;
+      await updateDoc(userDocRef, {
         name,
         photoUrl,
         bio,
         contact,
+        address,
       });
     } catch (error) {
       console.error("Error when we tried to update user", error);
