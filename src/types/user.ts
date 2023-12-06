@@ -1,6 +1,7 @@
 import { IAddress, IRole } from ".";
 
 export default interface IUser {
+  id: string;
   name: string;
   email: string;
   contact: string;

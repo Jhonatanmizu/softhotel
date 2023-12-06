@@ -1,15 +1,14 @@
 "use client";
 import useAuthStore from "@/store/auth/auth.store";
-import { useEffect } from "react";
-//Components
-import HomePage from "./navigation/home";
+import { PropsWithChildren, useEffect } from "react";
 
-const Home = () => {
+const AuthLayout = ({ children }: PropsWithChildren) => {
   const loadUser = useAuthStore.getState().loadUser;
   useEffect(() => {
     loadUser();
   }, [loadUser]);
 
-  return <HomePage />;
+  return <>{children}</>;
 };
-export default Home;
+
+export default AuthLayout;

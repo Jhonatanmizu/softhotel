@@ -3,9 +3,10 @@ import { toast } from "react-toastify";
 // Repositories
 import userRepo from "@/repositories/user.repository";
 // Service
+import storageService from "@/services/storage.service";
 import authService from "@/services/auth.service";
 // Types
-import { createUserDTO } from "@/dtos/user.dto";
+import { createUserDTO, updateUserDTO } from "@/dtos/user.dto";
 import { IUser } from "@/types";
 
 interface AuthState {
@@ -17,12 +18,16 @@ interface AuthState {
   ) => Promise<void>;
   recovery: (email: string) => Promise<void>;
   logout: () => void;
+  updateProfile: (userId: string, userDto: updateUserDTO) => Promise<void>;
   user: IUser;
   isSigned: boolean;
   isLoading: boolean;
   error: any | null;
+  loadUser: () => void;
 }
+
 const initialUserState: IUser = {
+  id: "",
   name: "",
   email: "",
   contact: "",
@@ -51,8 +56,9 @@ const useAuthStore = create<AuthState>()((set) => ({
       set({ isLoading: true });
       const user = await authService.loginWithEmailAndPassword(email, password);
       const userData = await userRepo.getUserById(user.uid);
-      set({ user: userData, isLoading: false, isSigned: true });
+      storageService.setData("user", userData);
       toast("Login realizado com sucesso!");
+      set({ user: userData, isLoading: false, isSigned: true });
     } catch (error: any) {
       console.error("Error when we tried to login", error.code);
       const errorMessage = authService.handleFirebaseAuthError(error.code);
@@ -68,10 +74,12 @@ const useAuthStore = create<AuthState>()((set) => ({
         password
       );
       const createdUser = await userRepo.createUser(userAuth, userDTO);
+      storageService.setData("user", createdUser);
+      toast("Cadastro realizado com sucesso!");
       set({ user: createdUser as IUser, isLoading: false, isSigned: true });
     } catch (error: any) {
-      console.error("Error creating user", error);
       const errorMessage = authService.handleFirebaseAuthError(error.code);
+      console.error("Error creating user", errorMessage);
       toast(errorMessage);
       set({ error });
     }
@@ -79,7 +87,33 @@ const useAuthStore = create<AuthState>()((set) => ({
   recovery: async (email) => {
     return await authService.recoveryPassword(email);
   },
-  logout: () => {},
+  logout: () => {
+    set({ isLoading: true });
+    setTimeout(() => {
+      set({ isSigned: false, user: initialUserState, isLoading: false });
+    }, 500);
+  },
+  loadUser: () => {
+    set({ isLoading: true });
+    const user = storageService.getData("user");
+    console.log("LOADED USER", user);
+    if (!user) return;
+    set({ user: user as IUser, isLoading: false, isSigned: true });
+  },
+  updateProfile: async (userId, userDTO) => {
+    try {
+      set({ isLoading: true });
+      await userRepo.updateUser(userId, userDTO);
+      const updatedUser = await userRepo.getUserById(userId);
+      console.log("Updated USER", updatedUser);
+      storageService.setData("user", updatedUser);
+      if (!updatedUser) return;
+      toast("Perfil atualizado com sucesso!");
+      set({ user: updatedUser as IUser, isLoading: false });
+    } catch (error) {
+      toast("Ocorreu um erro ao tentar atualizar o perfil!");
+    }
+  },
 }));
 
 export default useAuthStore;
